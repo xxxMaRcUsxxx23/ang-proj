@@ -1,0 +1,20 @@
+.box{
+    background-color: #fff;
+    padding: 2vh 4vh;
+    height: 40 vh;
+    .course-image{
+        height: 20vh;
+        width: 100%;
+        background-color: #effeff;
+
+        background-size: 100%;
+        img{
+            height: 90%;
+        }
+        p{
+            font-size: 0.75frem;
+        }
+    }
+}
+
+

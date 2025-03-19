@@ -1,0 +1,126 @@
+<div class="card">
+  <div class="card-header">Add Course</div>
+
+  <div class="card-body">
+    <!-- # -> isse eek variable declare hota hai
+         ="ngForm" tells Angular that this form should be controlled by 
+         Angular's FormsModule, enabling validation and tracking changes.
+         Think of #title="ngModel" like a health monitor for the input field.
+
+        It tracks if the field is empty, changed, or has errors.
+        We use this information to show error messages, disable buttons, etc.-->
+    <form #courseForm="ngForm" (ngSubmit)="onSubmit(courseForm)">
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Title</label>
+        <input
+          type="text"
+          
+          class="form-control"
+          placeholder="Enter title"
+          id="title"
+          name="title"
+          #title="ngModel"
+          [(ngModel)]="model().title"
+          required
+        />
+
+        @if(title.invalid && title.touched){
+
+        <div class="text-danger">Title is Required.</div>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          class="form-control"
+          rows="3"
+          placeholder="Enter description"
+          id="description"
+          name="description"
+          #description="ngModel"
+          [(ngModel)]="model().description"
+          required
+        ></textarea>
+        @if(description.invalid && description.touched){
+
+        <div class="text-danger">Description is Required.</div>
+        }
+      </div>
+
+      <div>
+        <label for="image">Choose an image:</label>
+        <input
+          type="file"
+          id="image"
+          name="image"
+          accept="image/*"
+          [multiple]="false"
+          (change)="onFileSelected($event)"
+          ngModel
+          required
+        />
+
+        @if(cover()){
+            <div class="imageDiv" align="right">
+                <img [src]="cover()" alt="">
+            </div>
+        }
+
+        @if(ImgNotPresent()){
+            <div class="text-danger">Image is Required.</div>
+        }
+
+        <!--(change)="onFileSelected($event)" means that when the user picks a file,
+         an Angular function called onFileSelected is triggered.
+         The $event carries details about the file that was selected.-->
+      </div>
+
+      <div align="center">
+        <button type="submit" class="btn btn-primary btn-lg">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<!-- <div class="row mt-3">
+  @for(course of courses;track $index){
+    <div class="col-lg-3">
+      <app-courses [course]="course" [isDelete]="true" (del)="deleteCourse($event)"></app-courses>
+      </div>
+  } @empty {
+    <div align="center">No course added yet</div>
+  }
+</div> -->
+<!-- <app-courses [courses]="courses" [isDelete]="true" (del)="deleteCourse($event)"></app-courses> -->
+<app-courses [isDelete]="true" ></app-courses>
+
+<!--
+For Loops
+<ul>
+  @for(user of users;track user.id){
+    {{user.name}}
+  }@empty{
+    Empty list of users
+  }
+
+  to work with index here
+  for(user of users;track $index){
+
+
+
+    <li>{{$index+1}} : {{user.name}}</li>
+  }
+
+</ul>
+
+
+
+switch case
+@switch(accessLevel){
+ @case ('admin'){ <p>sadsa</p> } 
+ @case ('moderator'){ <p>sadsa</p> } 
+ @default { <p>frfadsfdas</p>}
+}
+-->
